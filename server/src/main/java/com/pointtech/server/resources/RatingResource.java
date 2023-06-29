@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.pointtech.server.entities.User;
-import com.pointtech.server.services.UserServices;
+import com.pointtech.server.entities.Rating;
+import com.pointtech.server.services.RatingServices;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,41 +20,41 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/ratings")
+public class RatingResource {
 
     @Autowired
-    UserServices userServices;
+    RatingServices ratingServices;
 
     @GetMapping
-    public ResponseEntity<List<User>> findUser() {
-        List<User> list = userServices.findAll();
+    public ResponseEntity<List<Rating>> findUser() {
+        List<Rating> list = ratingServices.findAll();
         return ResponseEntity.ok().body(list);
 
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User user = userServices.findById(id);
-        return ResponseEntity.ok().body(user);
+    public ResponseEntity<Rating> findById(@PathVariable Long id) {
+        Rating rating = ratingServices.findById(id);
+        return ResponseEntity.ok().body(rating);
     }
 
     @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User user) {
-        user = userServices.insert(user);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(user);
+    public ResponseEntity<Rating> insert(@RequestBody Rating obj ) {
+        Rating rating = ratingServices.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(rating.getId()).toUri();
+        return ResponseEntity.created(uri).body(rating);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        userServices.delete(id);
+        ratingServices.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
-        user = userServices.update(id, user);
+    public ResponseEntity<Rating> update(@PathVariable Long id, @RequestBody Rating user) {
+        user = ratingServices.update(id, user);
         return ResponseEntity.ok().body(user);
     }
     
