@@ -117,6 +117,22 @@ public class Research implements Serializable{
         this.user = user;
     }
 
+    public Double getAverageSalary(){
+        double sum = 0.0;
+        for(Country research : countries){
+            sum += research.getSalary();
+        }
+        return sum / countries.size();
+    }
+
+    public Double getAverageScore(){
+        double sum = 0.0;
+        for(Rating rating : ratings){
+            sum += rating.getScore();
+        }
+        return sum / ratings.size();
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
