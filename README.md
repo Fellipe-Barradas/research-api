@@ -4,7 +4,6 @@
 
 - API para aprimorar as habilidades Spring Boot e banco de dados.<br>
 - API permite criar, deletar e atualizar usuários/pesquisas/rating assim como metódos unicos.
-<br>
 
 # Indice 
 - Como utilizar
@@ -13,8 +12,7 @@
 - Routes
 - Tecnologias
 - Autor
-<br>
-<br>
+
 
 # Como implementar
 
