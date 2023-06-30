@@ -1,8 +1,14 @@
 package com.pointtech.server.entities;
 
+import java.io.Serializable;
+
+
 import com.pointtech.server.entities.enums.CurrencyType;
 
-public class Country {
+
+public class Country implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     String country;
     double salary;
     String reference;
@@ -50,6 +56,8 @@ public class Country {
     public void setCurrency(CurrencyType currency) {
         this.currency = currency;
     }
+
+
 
     @Override
     public int hashCode() {

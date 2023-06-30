@@ -1,5 +1,8 @@
 package com.pointtech.server.entities;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Image {
     private String imgURL;
     private String alt;

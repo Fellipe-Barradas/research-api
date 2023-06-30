@@ -1,20 +1,32 @@
 package com.pointtech.server.entities;
 
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @Table(name = "tb_rating")
-public class Rating {
+public class Rating  implements Serializable{
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int score;
     private String feedback;    
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "rating_id")
+    Research research;
 
     public Rating() {
     }
@@ -58,6 +70,14 @@ public class Rating {
      */
     public String getFeedback() {
         return feedback;
+    }
+
+    public Research getResearch() {
+        return research;
+    }
+
+    public void setResearch(Research research) {
+        this.research = research;
     }
 
     /**
