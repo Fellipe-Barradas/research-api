@@ -1,16 +1,20 @@
 package com.pointtech.server.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -19,6 +23,9 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Research> researchies = new HashSet<>();
 
     public User(){
 
@@ -30,8 +37,6 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
     }
-
-
 
     public long getId() {
         return id;
@@ -65,6 +70,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public Set<Research> getResearchies() {
+        return this.researchies;
+    }
+
+    
     @Override
     public int hashCode() {
         final int prime = 31;

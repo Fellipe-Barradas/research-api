@@ -49,13 +49,34 @@ public class TestConfig implements CommandLineRunner{
 
         Country country1 = new Country("Brazil", 4000, "Glassdoor", CurrencyType.BRL);
 
+        Country country2 = new Country("USA", 4000, "Glassdoor", CurrencyType.USD);
+
         Research research1 = new Research(null, "Research 1", "Description 1", Instant.parse("2021-09-10T19:53:07Z"), new Image("https://img.icons8.com/ios/452/research.png", "Image1"));
 
-        research1.getRatings().addAll(Arrays.asList(r1,r2,r3,r4));
+        Research research2 = new Research(null, "Research 2", "Description 2", Instant.parse("2021-09-10T19:53:07Z"), new Image("https://img.icons8.com/ios/452/research.png", "Image2"));
+
+       
+
+        research1.getRatings().addAll(Arrays.asList(r3,r4));
+        research2.getRatings().addAll(Arrays.asList(r1,r2));
         research1.getCountries().add(country1);
+        research2.getCountries().add(country2);
+        research1.setUser(u1);
+        research2.setUser(u2);
+        
+        researchRepository.saveAll(Arrays.asList(research1, research2));
+
+        r1.setResearch(research2);
+        r2.setResearch(research2);
+        r3.setResearch(research1);
+        r4.setResearch(research1);
+
+        ratingRepository.saveAll(Arrays.asList(r1,r2,r3,r4));
         
 
-        researchRepository.saveAll(Arrays.asList(research1));
+        u1.getResearchies().add(research1);
+        u1.getResearchies().add(research2);
+        userRepository.save(u1);
       
     }
     
