@@ -28,8 +28,7 @@ public class UserServices {
             return userRepository.findById(id).get();
         } catch (NoSuchElementException e) {
             throw new ElementNotFounded(id);
-        }
-        
+        }  
     }
 
     public User insert(User user) {
@@ -51,9 +50,13 @@ public class UserServices {
     }
 
     public User update(Long id, User user){
-        User entity = userRepository.getReferenceById(id);
-        updateData(entity, user);
-        return userRepository.save(entity);
+        try {
+            User entity = userRepository.getReferenceById(id);
+            updateData(entity, user);
+            return userRepository.save(entity);
+        } catch (NoSuchElementException e) {
+            throw new ElementNotFounded(id);
+        }
     }
 
     private void updateData(User entity, User user) {
