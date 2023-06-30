@@ -5,7 +5,6 @@
 - API para aprimorar as habilidades Spring Boot e banco de dados.<br>
 - API permite criar, deletar e atualizar usuários/pesquisas/rating assim como metódos unicos.
 <br>
-<br>
 
 # Indice 
 - Como utilizar
@@ -33,15 +32,14 @@ Pré requisitos: Java 17
 <br>
 
 # Modelo conceitual
-![model]()
+![diagrama_research](https://github.com/Fellipe-Barradas/research-api/assets/115052701/2b144e14-9e16-4923-9ade-efac731482cd)
 
 # Resources
 - /users
 - /researchies
 - /ratings
 <br>
-<br>
-<br>
+
 # Routes
 
 - **GET** ----- localhost:8080/users
