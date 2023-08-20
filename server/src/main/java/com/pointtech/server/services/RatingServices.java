@@ -19,6 +19,9 @@ public class RatingServices {
     @Autowired
     RatingRepository ratingRepository;
 
+    public RatingServices(RatingRepository ratingRepository){
+        this.ratingRepository = ratingRepository;
+    }
     public List<Rating> findAll() {
         return ratingRepository.findAll();
     }
@@ -32,7 +35,7 @@ public class RatingServices {
     }
 
     public Rating insert(Rating rating) {
-         if(findById(rating.getId()) != null){
+         if(ratingRepository.existsById(rating.getId())){
             throw new ElementAlreadyExists("User already exists!");
         }
         return ratingRepository.save(rating);
