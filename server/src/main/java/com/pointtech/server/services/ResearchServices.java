@@ -19,11 +19,15 @@ public class ResearchServices {
     @Autowired
     ResearchRepository researchRepository;
 
+    public ResearchServices(ResearchRepository researchRepository){
+        this.researchRepository = researchRepository;
+    }
+
     public List<Research> findAll() {
         return researchRepository.findAll();
     }
 
-    public Research findById(Long id) {
+    public Research findById(long id) {
         try{
             return researchRepository.findById(id).get();
         }catch (NoSuchElementException e) {
@@ -33,7 +37,7 @@ public class ResearchServices {
     }
 
     public Research insert(Research research) {
-        if(findById(research.getId()) != null){
+        if(researchRepository.existsById(research.getId())){
             throw new ElementAlreadyExists("User already exists!");
         }
         return researchRepository.save(research);
@@ -49,10 +53,10 @@ public class ResearchServices {
         }
     }
 
-    public Research update(Long id, Research research){
+    public Research update(Long id, Research updatedResearch){
          try {
             Research entity = researchRepository.getReferenceById(id);
-            updateData(entity, research);
+            updateData(entity, updatedResearch);
             return researchRepository.save(entity);
         } catch (NoSuchElementException e) {
             throw new ElementNotFounded(id);
